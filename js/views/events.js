@@ -9,6 +9,20 @@ Organizer.NewEventView = Organizer.ItemView.extend({
   initialize: function() {
     Backbone.Validation.bind(this);
   },
+  bindings: {
+    '[name=title]': {
+      observe: 'title',
+      setOptions: {
+        validate: true
+      }
+    },
+    '[name=description]': {
+      observe: 'description',
+      setOptions: {
+        validate: true
+      }
+    }
+  },
   model: new Organizer.Event(),
   tagName: 'form',
   events: {

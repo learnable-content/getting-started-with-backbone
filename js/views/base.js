@@ -8,6 +8,8 @@ Organizer.ItemView = Backbone.View.extend({
     }
     this.$el.html( template(data) );
 
+    if (!_.isUndefined(this.bindings)) this.stickit();
+
     return this;
   }
 });

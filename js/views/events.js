@@ -19,7 +19,10 @@ Organizer.EventsListView = Backbone.View.extend({
 Organizer.EventView = Backbone.View.extend({
   tagName: 'li',
   render: function() {
-    this.$el.html(this.model.title + "<a href='#' class='btn btn-danger'>remove</a>");
+    var template = Handlebars.compile($('#event-template').html());
+
+
+    this.$el.html(template(this.model));
     return this;
   },
   events: {

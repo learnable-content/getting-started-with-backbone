@@ -3,5 +3,3 @@ Organizer.Event = Backbone.Model.extend({
     title: ''
   }
 });
-
-var unsafe = new Organizer.Event({body: '<script>alert("hacked!");</script>'});

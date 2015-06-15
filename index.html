@@ -32,14 +32,7 @@
 </nav>
 
 <div id="app" class="container">
-  <div class="page-header"><h1>Organizer</h1></div>
-
-  <h2>New event</h2>
-  <div id="new-event"></div>
-
-  <h2>List of events</h2>
-  <div id="events-list"></div>
-
+  <div id="index"></div>
   <div id="show-event"></div>
 </div>
 
@@ -48,6 +41,16 @@
     <p class="text-muted">&copy; 2015 Organizer</p>
   </div>
 </footer>
+
+<script id="index-template" type="text/x-handlebars-template">
+  <div class="page-header"><h1>Organizer</h1></div>
+
+  <h2>New event</h2>
+  <div id="new-event"></div>
+
+  <h2>List of events</h2>
+  <div id="events-list"></div>
+</script>
 
 <script id="show-event-template" type="text/x-handlebars-template">
   <div class="page-header"><h1>{{title}}</h1></div>

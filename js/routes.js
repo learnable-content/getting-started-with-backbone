@@ -5,10 +5,9 @@ Organizer.Router = Backbone.Router.extend({
   },
   index: function() {
     Organizer.events = new Organizer.EventsCollection();
-    new Organizer.NewEventView();
-
-    new Organizer.EventsListView({
-      collection: Organizer.events
+    new Organizer.EventsLayoutView({
+      collection: Organizer.events,
+      el: '#index'
     });
     Organizer.events.fetch();
   },

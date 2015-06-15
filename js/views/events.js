@@ -7,9 +7,6 @@ Organizer.ShowEventView = Organizer.ItemView.extend({
 
 Organizer.NewEventView = Organizer.ItemView.extend({
   tagName: 'form',
-  initialize: function() {
-    this.render();
-  },
   events: {
     'submit': 'createEvent'
   },
@@ -53,4 +50,27 @@ Organizer.EventsListView = Organizer.ListView.extend({
   tagName: 'ul',
   className: 'list-group',
   ItemView: Organizer.EventView
+});
+
+Organizer.EventsLayoutView = Backbone.View.extend({
+  render: function() {
+    var template = Handlebars.compile($('#index-template').html());
+    this.$el.html(template());
+
+    var newEventView = new Organizer.NewEventView();
+
+    var eventsListView = new Organizer.EventsListView({
+      collection: this.collection
+    });
+
+    var events = this.$('#events-list');
+    var new_event = this.$('#new-event');
+    events.append(eventsListView.render().el);
+    new_event.append(newEventView.render().el);
+
+    return this;
+  },
+  initialize: function() {
+    this.render();
+  }
 });

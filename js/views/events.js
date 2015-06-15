@@ -59,5 +59,10 @@ Organizer.EventView = Backbone.View.extend({
   events: {
     'click a': 'removeEvent'
   },
-  removeEvent: function() {console.log(this);}
+  removeEvent: function(e) {
+    e.preventDefault();
+    if(confirm('Are you sure?')) {
+      this.model.destroy();
+    }
+  }
 });

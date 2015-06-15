@@ -16,5 +16,4 @@ Organizer = {
 
 $(document).ready(function() {
   Organizer.initialize();
-  console.log('page is loaded');
 });

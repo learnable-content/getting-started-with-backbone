@@ -11,13 +11,15 @@ Organizer.EventsListView = Backbone.View.extend({
       events_elements.push(eventView.render().el);
     });
     this.$el.append(events_elements);
-    $('#app').html(this.el);
+    $('#events-list').html(this.el);
   },
-  tagName: 'ul'
+  tagName: 'ul',
+  className: 'list-group'
 });
 
 Organizer.EventView = Backbone.View.extend({
   tagName: 'li',
+  className: 'list-group-item',
   render: function() {
     var template = Handlebars.compile($('#event-template').html());
 

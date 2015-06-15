@@ -1,7 +1,7 @@
 Organizer = {
   initialize: function() {
     Organizer.events = new Organizer.EventsCollection();
-    
+
     Organizer.appLayout = new Organizer.BaseAppLayout({
       el: '#app'
     });

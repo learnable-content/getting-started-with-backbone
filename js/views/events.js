@@ -6,6 +6,10 @@ Organizer.ShowEventView = Organizer.ItemView.extend({
 });
 
 Organizer.NewEventView = Organizer.ItemView.extend({
+  initialize: function() {
+    Backbone.Validation.bind(this);
+  },
+  model: new Organizer.Event(),
   tagName: 'form',
   events: {
     'submit': 'createEvent'
@@ -14,19 +18,19 @@ Organizer.NewEventView = Organizer.ItemView.extend({
     e.preventDefault();
     var title = this.$('#event_title').val();
     var description = this.$('#event_description').val();
-    var model = new Organizer.Event();
     var that = this;
-    model.save({
+    this.model.set({
       title: title,
       description: description,
       position: Organizer.events.nextPosition()
-    }, {
-      success: function() {
-        Organizer.events.add(model);
-        that.el.reset();
-        that.$('.has-error').removeClass('has-error');
-      }
-    })
+    });
+    if(this.model.isValid(true)) {
+      Organizer.events.create(this.model.toJSON(), {
+        success: function() {
+          that.el.reset();
+        }
+      });
+    }
   },
   template: '#event-form-template'
 });

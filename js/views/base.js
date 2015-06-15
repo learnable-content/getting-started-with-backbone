@@ -29,3 +29,20 @@ Organizer.ListView = Backbone.View.extend({
     return this;
   }
 });
+
+Organizer.Layout = Backbone.View.extend({
+  render: function() {
+    var that = this;
+    var template = Handlebars.compile($(this.template).html());
+
+    this.$el.html(template());
+
+    _.each(this.regions, function(selector, name) {
+      that[name] = that.$(selector);
+    });
+
+    if (this.ready) this.ready();
+
+    return this;
+  }
+});

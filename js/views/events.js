@@ -11,7 +11,7 @@ Organizer.EventsListView = Backbone.View.extend({
       events_elements.push(eventView.render().el);
     });
     this.$el.append(events_elements);
-    $('#app').html(this.$el.html());
+    $('#app').html(this.el);
   },
   tagName: 'ul'
 });

@@ -8,9 +8,13 @@ Organizer = {
       collection: Organizer.events
     });
     Organizer.events.fetch();
+
+    Organizer.router = new Organizer.Router();
+    Backbone.history.start();
   }
 };
 
 $(document).ready(function() {
   Organizer.initialize();
+  console.log('page is loaded');
 });

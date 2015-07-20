@@ -32,7 +32,8 @@ Organizer.NewEventView = Backbone.View.extend({
     var that = this;
     model.save({
       title: title,
-      description: description
+      description: description,
+      position: Organizer.events.nextPosition()
     }, {
       success: function() {
         Organizer.events.add(model);
@@ -72,18 +73,18 @@ Organizer.EventView = Backbone.View.extend({
     return this;
   },
   events: {
-    'click .btn-danger': 'removeEvent',
-    'click .show': 'showEvent'
+    'click .btn-danger': 'removeEvent'//,
+    //'click .show': 'showEvent'
   },
   removeEvent: function(e) {
     e.preventDefault();
     if(confirm('Are you sure?')) {
       this.model.destroy();
     }
-  },
-  showEvent: function(e) {
-    e.preventDefault();
-    var id = $(e.currentTarget).data('id');
-    Organizer.router.navigate("events/" + id, {trigger: true});
-  }
+  }//,
+  //showEvent: function(e) {
+  //  e.preventDefault();
+  //  var position = $(e.currentTarget).data('position');
+  //  Organizer.router.navigate("events/" + position, {trigger: true});
+  //}
 });

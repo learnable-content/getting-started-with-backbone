@@ -13,5 +13,6 @@ Organizer.Event = Backbone.Model.extend({
       return {'event_title': "Title has to be present!"}
     }
   },
-  localStorage: new Backbone.LocalStorage('events')
+  localStorage: new Backbone.LocalStorage('events'),
+  idAttribute: 'position'
 });

@@ -1,22 +1,157 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/4.5.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Adding a new Event Form
 
-Code samples can also be downloaded through the Premium website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+At this point we have a list of events being rendered each time the corresponding collection changes. It it time to implement a form to add new events.
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+First of all, remove the `add` method call inside the *app.js*.
 
-**Happy Learning!**
+Next create a new form template:
 
-## Course Index: 
+```html
+<script id="event-form-template" type="text/x-handlebars-template">
+    <div class="form-group">
+      <label for="event_title">Title</label>
+      <input type="text" id="event_title" class="form-control" name="title">
+    </div>
+    <input type="submit" class="btn btn-primary" value="Add an event">
+</script>
+```
 
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+Rework the markup:
+
+```html
+<div id="app" class="container">
+  <div class="page-header"><h1>Welcome to Organizer</h1></div>
+  <h2>New event</h2>
+  <div id="new-event"></div>
+  <h2>List of events</h2>
+  <div id="events-list"></div>
+</div>
+```
+
+Define the new view:
+
+```js
+Organizer.NewEventView = Backbone.View.extend({
+
+});
+```
+
+and instantiate it:
+
+```js
+new Organizer.NewEventView();
+```
+
+What we want to happen is to render this view as soon as it was instantiated:
+
+```js
+Organizer.NewEventView = Backbone.View.extend({
+  initialize: function() {
+    this.render();
+  }
+});
+```
+
+Now the `render` function:
+
+```js
+Organizer.NewEventView = Backbone.View.extend({
+tagName: 'form',
+  initialize: function() {
+    this.render();
+  },
+  render: function() {
+    var template = Handlebars.compile($('#event-form-template').html());
+    this.$el.html( template() );
+    $('#new-event').html(this.el);
+    return this;
+  }
+});
+```
+
+# Handling Submit Form Event
+
+Now we need to handle the `submit` form event. 
+
+```js
+events: {
+  'submit': 'createEvent'
+},
+```
+
+As you see I write just `submit` because I want this event to be bound to the top-level element which is `form` in our case.
+
+The first thing to do inside the handler is preventing the default action from happening:
+
+```js
+createEvent: function(e) {
+  e.preventDefault();
+}
+```
+
+Now we have to grab the title of an event and save the model:
+
+```js
+var title = this.$el.find('#event_title').val();
+```
+
+Backbone provides us with a shortcut to simplify this line a bit
+
+```js
+var title = this.$('#event_title').val();
+```
+
+Now instantiate a new model and save it with the provided title:
+
+```js
+var model = new Organizer.Event();
+
+model.save({
+	title: title
+})
+```
+
+For model saving to actually work we also have to provide `localStorage` attribute for collection because otherwise Backbone won't know where to send the request.
+
+```js
+localStorage: new Backbone.LocalStorage('events')
+```
+
+If you have a back-end server use `url` attribute instead.
+
+# Testing in the browser
+
+Now reload the browser and add a new event. No errors in the console, but new item will not be added to the list. This happens because we have not actually updated the collection after saving the model. `save` provides the `success` callback:
+
+```js
+this.model.save({
+  title: title
+}, {
+  success: function () {
+    Organizer.EventsList.add(this.model);
+    this.el.reset();
+  }
+});
+```
+
+I've also added one line of code to reset the form's contents using JavaScript's `reset` method. Note that I am not using `$el` here. As you remember `$el` returns a wrapped jQuery set that responds to its own special methods and `reset()` is JavaScript's basic method, not jQuery's. Therefore I use `el` here to call reset on it. You can also write
+
+```
+this.$el[0].reset();
+```
+
+to turn this wrapped set to a simple JS node.
+
+Lastly introduce `that` variable to overcome scoping issue:
+
+```js
+var that = this;
+[...]
+
+success: function () {
+  Organizer.EventsList.add(that.model);
+  that.el.reset();
+}
+```

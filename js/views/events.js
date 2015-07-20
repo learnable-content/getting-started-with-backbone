@@ -1,3 +1,33 @@
+Organizer.NewEventView = Backbone.View.extend({
+  tagName: 'form',
+  initialize: function() {
+    this.render();
+  },
+  render: function() {
+    var template = Handlebars.compile($('#event-form-template').html());
+    this.$el.html(template());
+    $('#new-event').html(this.el);
+    return this;
+  },
+  events: {
+    'submit': 'createEvent'
+  },
+  createEvent: function(e) {
+    e.preventDefault();
+    var title = this.$('#event_title').val();
+    var model = new Organizer.Event();
+    var that = this;
+    model.save({
+      title: title
+    }, {
+      success: function() {
+        Organizer.events.add(model);
+        that.el.reset();
+      }
+    })
+  }
+});
+
 Organizer.EventsListView = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.collection, 'reset', this.render);
@@ -10,8 +40,9 @@ Organizer.EventsListView = Backbone.View.extend({
       var eventView = new Organizer.EventView({model: event});
       events_elements.push(eventView.render().el);
     });
-    this.$el.append(events_elements);
-    $('#events-list').html(this.el);
+    this.$el.html(events_elements);
+    $('#events-list').append(this.el);
+    return this;
   },
   tagName: 'ul',
   className: 'list-group'

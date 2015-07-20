@@ -1,22 +1,9 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/8.1.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Conclusion
 
-Code samples can also be downloaded through the Premium website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+Congratulations! You've made it to the end of this course and created your first Backbone.js application. I hope it was useful for you and now you feel confident to start using Backbone into your real projects. Feel free to utilize parts of the code and concepts from the demo app.
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+I would really love to receive feedback from this course, so feel free to drop me an e-mail. Also if you have any questions on this course contact me directly or use commenting system on Learnable – I will answer as soon as possible.
 
-**Happy Learning!**
-
-## Course Index: 
-
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+So I want to thank you for staying with me till the end. Happy coding and see you soon!

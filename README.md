@@ -1,22 +1,40 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/2.2.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Organizing backbone js code
 
-Code samples can also be downloaded through the Learnable.com website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+Create the following directories inside the "js" folder:
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+* collections
+* models
+* views
 
-**Happy Learning!**
+Next create the following files inside the "js" folder:
 
-## Course Index: 
+* app.js
+* router.js
 
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+*app.js* is the main file of our application, so it has to be loaded first (right after all the libraries). It is a common mistake to place files in the wrong order so please watch out for it:
+
+```html
+<script src="js/app.js"></script>
+```
+
+*router.js* will contain app's routes which we are going to implement in a later lesson.
+
+```html
+<script src="js/router.js"></script>
+```
+
+Lastly let's add a `div` tag to contain all our project's elements. Many developers give it an id of `app`. I'll also assign it a `container` class which equips this element with some Bootstrap's styles. For testing you may also add some text inside this "div":
+
+```html
+<div id="app" class="container"><h1>Hello!</h1></div>
+```
+
+# Loading the project
+
+Okay, now boot your web server, open your browser and navigate to [http://127.0.0.1/organizer/index.html](http://127.0.0.1/organizer/index.html).
+
+Open up browser's console by pressing `F12` and reload the page by pressing `F5`. You should not see any errors in the console. Type in `Backbone` in the console and press `Enter`. You should see some basic information about BackboneJS, including its version.
+
+Before proceeding to the next step, remove the `h1` tag from the `.container`.

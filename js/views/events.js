@@ -1,25 +1,14 @@
-Organizer.ShowEventView = Backbone.View.extend({
+Organizer.ShowEventView = Organizer.ItemView.extend({
   initialize: function() {
     this.render();
   },
-  render: function() {
-    var template = Handlebars.compile($('#show-event-template').html());
-    this.$el.html(template(this.model));
-    $('#show-event').html(this.el);
-    return this;
-  }
+  template: '#show-event-template'
 });
 
-Organizer.NewEventView = Backbone.View.extend({
+Organizer.NewEventView = Organizer.ItemView.extend({
   tagName: 'form',
   initialize: function() {
     this.render();
-  },
-  render: function() {
-    var template = Handlebars.compile($('#event-form-template').html());
-    this.$el.html(template());
-    $('#new-event').html(this.el);
-    return this;
   },
   events: {
     'submit': 'createEvent'
@@ -41,50 +30,27 @@ Organizer.NewEventView = Backbone.View.extend({
         that.$('.has-error').removeClass('has-error');
       }
     })
-  }
+  },
+  template: '#event-form-template'
 });
 
-Organizer.EventsListView = Backbone.View.extend({
-  initialize: function() {
-    this.listenTo(this.collection, 'reset', this.render);
-    this.listenTo(this.collection, 'add', this.render);
-    this.listenTo(this.collection, 'remove', this.render);
-  },
-  render: function() {
-    var events_elements = [];
-    this.collection.each(function(event) {
-      var eventView = new Organizer.EventView({model: event});
-      events_elements.push(eventView.render().el);
-    });
-    this.$el.html(events_elements);
-    $('#events-list').append(this.el);
-    return this;
-  },
-  tagName: 'ul',
-  className: 'list-group'
-});
-
-Organizer.EventView = Backbone.View.extend({
+Organizer.EventView = Organizer.ItemView.extend({
   tagName: 'li',
   className: 'list-group-item',
-  render: function() {
-    var template = Handlebars.compile($('#event-template').html());
-    this.$el.html(template(this.model.toJSON()));
-    return this;
-  },
   events: {
-    'click .btn-danger': 'removeEvent'//,
-    //'click .show': 'showEvent'
+    'click .btn-danger': 'removeEvent'
   },
   removeEvent: function(e) {
     e.preventDefault();
     if(confirm('Are you sure?')) {
       this.model.destroy();
     }
-  }//,
-  //showEvent: function(e) {
-  //  e.preventDefault();
-  //  var position = $(e.currentTarget).data('position');
-  //  Organizer.router.navigate("events/" + position, {trigger: true});
-  //}
+  },
+  template: '#event-template'
+});
+
+Organizer.EventsListView = Organizer.ListView.extend({
+  tagName: 'ul',
+  className: 'list-group',
+  ItemView: Organizer.EventView
 });

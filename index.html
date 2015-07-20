@@ -53,9 +53,15 @@
 
 <script id="event-form-template" type="text/x-handlebars-template">
   <div class="form-group">
-    <label for="event_title">Title</label>
+    <label class="control-label" for="event_title">Title</label>
     <input type="text" id="event_title" class="form-control" name="title">
   </div>
+
+  <div class="form-group">
+    <label class="control-label" for="event_description">Description</label>
+    <textarea type="text" id="event_description" class="form-control" name="description"></textarea>
+  </div>
+
   <input type="submit" class="btn btn-primary" value="Add an event">
 </script>
 </body>

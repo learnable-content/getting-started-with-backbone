@@ -15,14 +15,17 @@ Organizer.NewEventView = Backbone.View.extend({
   createEvent: function(e) {
     e.preventDefault();
     var title = this.$('#event_title').val();
+    var description = this.$('#event_description').val();
     var model = new Organizer.Event();
     var that = this;
     model.save({
-      title: title
+      title: title,
+      description: description
     }, {
       success: function() {
         Organizer.events.add(model);
         that.el.reset();
+        that.$('.has-error').removeClass('has-error');
       }
     })
   }

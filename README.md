@@ -1,22 +1,23 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/1.4.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Underscore.js
 
-Code samples can also be downloaded through the Learnable.com website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+We are going to utilize a couple of other technologies throughout this course, so let's briefly discuss them.
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+[Underscore.js](http://underscorejs.org/) is the only Backbone.js hard dependency. It provides more than a hundred of useful functional programming methods like `map`, `filter`, `each`, `invoke` and many others. It also has the templating functionality, however we are going to use other templating engine in this course.
 
-**Happy Learning!**
+# jQuery
 
-## Course Index: 
+[jQuery](https://jquery.com/). I am sure you have heard of jQuery and probably used it in some of your projects. It is a small but powerful JavaScript library that simplifies many trivial operations (DOM manipulation, working with AJAX, event handling) while supporting all major browsers. This library has emerged in 2006 and since then has become a de-facto standard; it is used on more than 60% of all web sites.
 
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+# HTML5 Local Storage
+
+**HTML5 local storage**. We are building a web app and of course we need some place to store our data. We could employ some kind of database and server-side code to communicate with it, but that would distract us from the main task so to keep things simple I've decided to use browser's local storage instead. An idea of local storage was around for quite some time, but only with the emerging of HTML5 it has become a reality when specification of a simple key-value **Web Storage** was introduced. Web Storage is persistent, which means that it stores data even after a user has left the page, however those data are not transmitted to the remove server (unlike cookies, for example). HTML5 Local storage is supported by all major browsers and even Internet Explorer starting from version 8. If you want to learn more and see Local Storage in action, I encourage you to read [the chapter](http://diveintohtml5.info/storage.html) from Mark Piligrim's "Dive Into HTML5" book.
+
+# Twitter Bootstrap
+
+[Twitter Bootstrap](http://getbootstrap.com/). This is the CSS framework created by Twitter that works nicely with all major browsers including mobile and has lots of different styles already defined. We will talk a bit more about Bootstrap in the future steps.
+
+# Handlebars.js
+
+[HandlebarsJS](http://handlebarsjs.com/) is the popular templating engine that will be used for our views. Let's put it aside for now as one in one of the next lessons we will discuss it thoroughly.

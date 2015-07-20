@@ -4,7 +4,7 @@ Organizer.Router = Backbone.Router.extend({
     'events/:id': 'showEvent'
   },
   index: function() {
-    Organizer.events = new Organizer.Events();
+    Organizer.events = new Organizer.EventsCollection();
     new Organizer.NewEventView();
 
     new Organizer.EventsListView({
@@ -13,7 +13,7 @@ Organizer.Router = Backbone.Router.extend({
     Organizer.events.fetch();
   },
   showEvent: function(id) {
-    Organizer.events = new Organizer.Events();
+    Organizer.events = new Organizer.EventsCollection();
     Organizer.events.fetch();
     new Organizer.ShowEventView( {model: Organizer.events.localStorage.find({id: id})} );
   }

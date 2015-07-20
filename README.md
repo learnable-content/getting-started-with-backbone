@@ -1,22 +1,47 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/6.1.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Talking in general about proper naming
 
-Code samples can also be downloaded through the Premium website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+Welcome to the lesson 6 of Getting Started with Backbone.js course! In this lesson we are going to refactor our code and introduce some useful concepts to make your application much easier to maintain and scale.
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+As I already told you, Backbone is not a framework, but rather a library and its not opinionated. This means that its totally you responsibility to use proper naming conventions and code structuring. Until now we haven't really taken care of this which resulted in a pretty messy code that is hard to maintain.
 
-**Happy Learning!**
+It is important that all members of you team understand and follow **naming conventions** that are used in the project. If everyone is naming variables and functions differently, it will result in a huge mess, whereas with clear names you will quickly understand what is the purpose of some variable.
+In our demo app I tried to follow naming conventions that are employed by many JS developers, however still there is one thing that I don't like.
 
-## Course Index: 
+# An example
 
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+Let's make it more clear that this is a collection class:
+
+```js
+Organizer.EventsCollection = Backbone.Collection.extend({
+```
+
+Change all references to it as well. Inside the router there is a duplicating line here:
+
+```js
+Organizer.EventsList = new Organizer.Events();
+```
+
+Move it into the *app.js* and rename it correctly:
+
+```js
+Organizer.EventsList = new Organizer.EventsCollection();
+```
+In the same file rename 
+
+```js
+Organizer.EventsList
+```
+
+to 
+
+```js
+Organizer.events
+```
+
+Do the same inside the router and inside the *events.js* file.
+
+Now reload the page and check we haven't break anything.
+
+So once again: you may introduce our own naming conventions, just make sure to follow them accurately because otherwise you will end up with a situation where you don't understand what you code does.

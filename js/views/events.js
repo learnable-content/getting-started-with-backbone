@@ -11,7 +11,7 @@ Organizer.EventsListView = Backbone.View.extend({
       events_elements.push(eventView.render().el);
     });
     this.$el.append(events_elements);
-    $('#app').html(this.el);
+    $('#app').html(this.$el.html());
   },
   tagName: 'ul'
 });
@@ -19,7 +19,11 @@ Organizer.EventsListView = Backbone.View.extend({
 Organizer.EventView = Backbone.View.extend({
   tagName: 'li',
   render: function() {
-    this.$el.html(this.model.title);
+    this.$el.html(this.model.title + "<a href='#' class='btn btn-danger'>remove</a>");
     return this;
-  }
+  },
+  events: {
+    'click a': 'removeEvent'
+  },
+  removeEvent: function() {console.log(this);}
 });

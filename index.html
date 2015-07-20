@@ -15,12 +15,33 @@
   <script src="js/routes.js"></script>
 </head>
 <body>
-<div id="app" class="container">
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div id="navbar" class="collapse navbar-collapse">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Organizer</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-  <script id="event-template" type="text/x-handlebars-template">
-    {{title}}
-    <a href="#" class="btn btn-danger">remove</a>
-  </script>
+<div id="app" class="container">
+  <div class="page-header"><h1>Events</h1></div>
+  <div id="events-list"></div>
 </div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">&copy; 2015 Organizer</p>
+  </div>
+</footer>
+
+<script id="event-template" type="text/x-handlebars-template">
+  {{title}}
+  <a href="#" class="btn btn-danger">remove</a>
+</script>
 </body>
 </html>

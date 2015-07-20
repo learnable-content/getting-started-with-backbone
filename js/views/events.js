@@ -67,16 +67,10 @@ Organizer.EventsLayout = Organizer.Layout.extend({
 
     this.eventsList.append(eventsListView.render().el);
     this.newEvent.append(newEventView.render().el);
-  },
-  initialize: function() {
-    this.render();
   }
 });
 
 Organizer.ShowEventLayout = Organizer.Layout.extend({
-  initialize: function() {
-    this.render();
-  },
   template: '#show-event-layout-template',
   regions: {
     event: '#event'

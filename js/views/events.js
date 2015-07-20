@@ -1,12 +1,7 @@
 Organizer.EventsListView = Backbone.View.extend({
   render: function() {
-    var events = [
-      {title: 'go to work'},
-      {title: 'meet with friends'},
-      {title: 'visit grandma'}
-    ];
     var events_elements = [];
-    _.each(events, function(event) {
+    this.collection.each(function(event) {
       var eventView = new Organizer.EventView({model: event});
       events_elements.push(eventView.render().el);
     });
@@ -22,9 +17,7 @@ Organizer.EventView = Backbone.View.extend({
   className: 'list-group-item',
   render: function() {
     var template = Handlebars.compile($('#event-template').html());
-
-
-    this.$el.html(template(this.model));
+    this.$el.html(template(this.model.toJSON()));
     return this;
   },
   events: {

@@ -1,22 +1,64 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/4.3.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Rendering collection
 
-Code samples can also be downloaded through the Premium website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+We now have a model and a collection in place and it is high time to use them in practice and render some data into the view.
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+First of all let's instantiate collection inside the *app.js& and fetch data.
 
-**Happy Learning!**
+```js
+var events = new Organizer.Events();
+events.fetch();
+```
 
-## Course Index: 
+Your local storage is going to be empty for now, so manually populate your collection:
 
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+```js
+events.reset( [{title: 'event 1'}, {title: 'event 2'}, {title: 'event 3'}] );
+```
+
+Now just provide your collection to the view as an attribute:
+
+```js
+var eventsList = new Organizer.EventsListView({collection: events});
+```
+
+Inside the view we have to remove the array with demo data and tweak the cycle a bit:
+
+```js
+this.collection.each(function(event) {
+```
+
+Reload the page and note that nothing is being rendered? Debug with the help of `console.log`:
+
+```js
+console.log(this.model);
+```
+
+We've already seen that model's attributes cannot be accessed directly therefore we need to turn the model to an object using `toJSON`:
+
+```js
+this.$el.html( template(this.model.toJSON()) );
+```
+
+`fetch` can accept two callbacks: `success` and `error`:
+
+```js
+events.fetch({
+  success: function() {
+    console.log('okay!')
+  },
+  error: function() {
+    console.log('error');
+  }
+});
+```
+
+Each callback accepts a collection, response and options as arguments. For now we may put these lines
+
+```js
+events.reset( [{title: 'event 1'}, {title: 'event 2'}, {title: 'event 3'}] );
+eventsList.render();
+```
+
+inside the `success` callback. In the next step I'll show you another, more preferable solution.

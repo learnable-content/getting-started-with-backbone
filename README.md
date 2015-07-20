@@ -1,22 +1,66 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/3.5.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Styling and Organizing the App
 
-Code samples can also be downloaded through the Premium website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+Before proceeding to the next lesson let's spend a couple of minutes and style our app just a bit.
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+First of all, add a nice top menu provided by Bootstrap:
 
-**Happy Learning!**
+```html
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div id="navbar" class="collapse navbar-collapse">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Organizer</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+```
 
-## Course Index: 
+Next let's work on our list a bit. Assign `list-group` class to the unordered list:
 
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+```js
+className: 'list-group'
+```
+
+and `list-group-item` to each individual item:
+
+```js
+className: 'list-group-item'
+```
+
+Also it is not the best idea to render the list directly into the `#app` replacing any content that might be present there. So create a separate block to put contents there:
+
+```html
+<div id="app" class="container">
+  <div id="events-list"></div>
+</div>
+```
+
+and modify the `render` function
+
+```js
+$('#events-list').html(this.el);
+```
+
+You may also add a nice heading like this:
+
+```html
+<div class="page-header"><h1>Events</h1></div>
+```
+
+And a footer:
+
+```html
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">&copy; 2015 Organizer</p>
+  </div>
+</footer>
+```
+
+Okay, now our app looks a bit better.

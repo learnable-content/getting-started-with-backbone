@@ -1,22 +1,52 @@
-## Welcome
-###Getting Started with Backbone.js
-This course has handouts and code samples provided.
+![](headings/7.3.png)
 
-Code samples will be available on both GitHub and Sitepoint Premium. This course has an assigned GitHub repo with code samples available via branches. 
+# Using StickIt to introduce Data Binding
 
-Code samples can also be downloaded through the Premium website. When viewing the course page, [lesson 1.1](https://github.com/learnable-content/getting-started-with-backbone/tree/lesson1.1) will contain all handouts and code samples. All lesson pages thereafter will provide code samples needed as required by the lesson. Click **Download Zip** to download the assets.
+What we want to do is update the model's attributes each time the user has changed something in the form. To achieve this task, we are going to use StickIt plugin that introduces data binding. If you have used AngularJS before, you know what I mean. If no – stay with me for a couple of minutes and things will become clear.
 
-Handouts are available via the first lesson of a course as .md or .pdf file formats. Just explore the list below.
+Include the latest version of the plugin from GitHub:
 
-**Happy Learning!**
+```html
+<script src="https://raw.githubusercontent.com/NYTimes/backbone.stickit/master/backbone.stickit.js"></script>
+```
 
-## Course Index: 
+What we have to do now is to set up data bindings inside the view to instruct which field corresponds to which attribute. Moreover, we need to re-validate the model each time something has changed.
 
-* Lesson 1 - Course Introduction
-* Lesson 2 - Laying the Foundations
-* Lesson 3 - Views
-* Lesson 4 - Models and Collections
-* Lesson 5 - Working with Routes
-* Lesson 6 - Refactoring and Finalizing the App
-* Lesson 7 - Working with Backbone Plugins
-* Lesson 8 - Conclusion
+```js
+bindings: {
+  '[name=title]': {
+    observe: 'title',
+    setOptions: {
+      validate: true
+    }
+  },
+  '[name=description]': {
+    observe: 'description',
+    setOptions: {
+      validate: true
+    }
+  }
+},
+```
+
+We also have to call `stickit` method on our element inside the `render` function. As long as we are using a base class we have to check if this method should actually be called. To do this simply check if a view has any bindings:
+
+```js
+if (!_.isUndefined(this.bindings)) {
+  this.stickit();
+}
+```
+
+# Configure the Backbone Validation
+
+The last step is to add
+
+```js
+Backbone.Validation.configure({
+  forceUpdate: true
+});
+```
+
+to the *validation.js* – this is required for validation to work correctly with data binding.
+
+Reload the page and observe the result!

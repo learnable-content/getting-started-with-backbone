@@ -1,3 +1,15 @@
+Organizer.ShowEventView = Backbone.View.extend({
+  initialize: function() {
+    this.render();
+  },
+  render: function() {
+    var template = Handlebars.compile($('#show-event-template').html());
+    this.$el.html(template(this.model));
+    $('#show-event').html(this.el);
+    return this;
+  }
+});
+
 Organizer.NewEventView = Backbone.View.extend({
   tagName: 'form',
   initialize: function() {
@@ -60,12 +72,18 @@ Organizer.EventView = Backbone.View.extend({
     return this;
   },
   events: {
-    'click a': 'removeEvent'
+    'click .btn-danger': 'removeEvent',
+    'click .show': 'showEvent'
   },
   removeEvent: function(e) {
     e.preventDefault();
     if(confirm('Are you sure?')) {
       this.model.destroy();
     }
+  },
+  showEvent: function(e) {
+    e.preventDefault();
+    var id = $(e.currentTarget).data('id');
+    Organizer.router.navigate("events/" + id, {trigger: true});
   }
 });

@@ -38,6 +38,8 @@
 
   <h2>List of events</h2>
   <div id="events-list"></div>
+
+  <div id="show-event"></div>
 </div>
 
 <footer class="footer">
@@ -46,8 +48,13 @@
   </div>
 </footer>
 
+<script id="show-event-template" type="text/x-handlebars-template">
+  <div class="page-header"><h1>{{title}}</h1></div>
+  <div class="well well-lg">{{description}}</div>
+</script>
+
 <script id="event-template" type="text/x-handlebars-template">
-  {{title}}
+  <a href="#" data-id="{{id}}" class="show">{{title}}</a>
   <a href="#" class="btn btn-danger">remove</a>
 </script>
 
@@ -59,7 +66,7 @@
 
   <div class="form-group">
     <label class="control-label" for="event_description">Description</label>
-    <textarea type="text" id="event_description" class="form-control" name="description"></textarea>
+    <textarea id="event_description" class="form-control" name="description"></textarea>
   </div>
 
   <input type="submit" class="btn btn-primary" value="Add an event">
